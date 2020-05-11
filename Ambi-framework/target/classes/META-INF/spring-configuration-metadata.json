@@ -1,0 +1,18 @@
+{
+  "groups": [
+    {
+      "name": "spring.datasource.druid.master",
+      "type": "javax.sql.DataSource",
+      "sourceType": "work.ambitlu.framework.config.DruidConfig",
+      "sourceMethod": "masterDataSource(work.ambitlu.framework.config.properties.DruidProperties)"
+    },
+    {
+      "name": "spring.datasource.druid.slave",
+      "type": "javax.sql.DataSource",
+      "sourceType": "work.ambitlu.framework.config.DruidConfig",
+      "sourceMethod": "slaveDataSource(work.ambitlu.framework.config.properties.DruidProperties)"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
