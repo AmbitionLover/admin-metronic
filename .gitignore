@@ -6,7 +6,7 @@
 /build/
 !gradle/wrapper/gradle-wrapper.jar
 
-target/
+/target/
 !.mvn/wrapper/maven-wrapper.jar
 
 ######################################################################
@@ -48,3 +48,4 @@ logs
 !*/build/*.java
 !*/build/*.html
 !*/build/*.xml
+
