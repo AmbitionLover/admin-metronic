@@ -3,6 +3,7 @@ package work.ambitlu.common.core.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import work.ambitlu.common.core.domain.AjaxResult;
 import work.ambitlu.common.core.domain.AjaxResult.Type;
 import work.ambitlu.common.core.page.PageDomain;
@@ -30,6 +31,7 @@ import java.util.List;
  * @author Ammbi
  */
 @Slf4j
+@CrossOrigin
 public class BaseController
 {
 
@@ -110,7 +112,7 @@ public class BaseController
     {
         TableDataInfo rspData = new TableDataInfo();
         rspData.setCode(0);
-        rspData.setRows(list);
+        rspData.setData(list);
         rspData.setTotal(new PageInfo(list).getTotal());
         return rspData;
     }
