@@ -1,12 +1,14 @@
 package work.ambitlu.common.core.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Tree基类
  * 
  * @author ruoyi
  */
+@EqualsAndHashCode(callSuper = false)
 @Data
 public class TreeEntity extends BaseEntity
 {

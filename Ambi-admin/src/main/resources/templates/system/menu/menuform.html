@@ -1,0 +1,82 @@
+<div class="layui-form" th:object="${menu}" lay-filter="layuiadmin-form-role" style="padding: 20px 30px 0 0;"
+     xmlns:th="http://www.w3.org/1999/xhtml">
+  <div class="layui-form-item">
+    <label class="layui-form-label">选择框</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input name="menuId"   type="hidden" th:field="*{menuId}"   />
+        <input id="treeId" name="parentId" type="hidden" th:field="*{parentId}" />
+        <input class="layui-input" type="text" id="treeName" readonly="true" th:value="${menu.parentName == null ? '无' : menu.parentName}">
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">菜单类型</label>
+    <div class="layui-input-block">
+      <label class="radio-box"> <input type="radio" th:field="*{menuType}" name="menuType" value="M" /> 目录 </label>
+      <label class="radio-box"> <input type="radio" th:field="*{menuType}" name="menuType" value="C" /> 菜单 </label>
+      <label class="radio-box"> <input type="radio" th:field="*{menuType}" name="menuType" value="F" /> 按钮 </label>
+
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">菜单名称</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input class="layui-input" type="text" name="menuName" id="menuName" th:field="*{menuName}" required>
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">显示顺序</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="text" name="roleSort" th:field="*{orderNum}"  placeholder="显示顺序" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+
+
+  <div class="layui-form-item">
+    <label class="layui-form-label"></label>
+    <div class="layui-input-inline">
+      <input type="button" lay-submit lay-filter="LAY-menu-back-submit" value="确认" class="layui-btn">
+    </div>
+  </div>
+</div>
+
+<script>
+  layui.use(['admin','layer', 'form'], function(){
+    var $ = layui.$
+            ,layer = layui.layer
+            ,form = layui.form
+            ,prefix = ctx + "system/menu";
+
+
+    /*菜单管理-修改-选择菜单树*/
+    //弹出登录页面
+    $(document).on('click','#treeName',function(){
+      var menuId = $("#treeId").val();
+      if(menuId > 0) {
+        var url = prefix + "/selectMenuTree/" + menuId;
+        layer.open({ //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+          type: 2,
+          id: 'LAY_layuipro', //设定一个id，防止重复弹出
+          title:"登录页面",
+          area: ['55%','70%'],//类型：String/Array，默认：'auto'  只有在宽高都定义的时候才不会自适应
+          fix: false, //不固定
+          maxmin: true,//开启最大化最小化按钮
+          shadeClose: true,//点击阴影处可关闭
+          shade:0.4,//背景灰度
+          skin: 'layui-layer-rim', //加上边框
+          content: url,
+          resize:false
+        });
+        // $.modal.open("选择菜单", url, '380', '380');
+      } else {
+        layer.msg('主菜单不能选择');
+      }
+
+    });
+  });
+</script>

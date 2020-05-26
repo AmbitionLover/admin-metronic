@@ -147,7 +147,9 @@ layui.define(['table', 'form'], function(exports){
       {type: 'checkbox', fixed: 'left'}
       ,{field: 'dataScope', width: 80, title: 'ID', sort: true}
       ,{field: 'roleName', title: '角色名'}
+      ,{field: 'roleSort', title: '显示顺序'}
       ,{field: 'roleKey', title: '拥有权限'}
+      ,{field: 'createTime', title: '创建时间'}
       ,{field: 'remark', title: '备注'}
       ,{title: '操作', width: 150, align: 'center', fixed: 'right', toolbar: '#table-useradmin-admin'}
     ]]
@@ -164,11 +166,11 @@ layui.define(['table', 'form'], function(exports){
       });
     }else if(obj.event === 'edit'){
       admin.popup({
-        title: '添加新角色'
+        title: '编辑角色'
         ,area: ['500px', '480px']
         ,id: 'LAY-popup-user-add'
         ,success: function(layero, index){
-          view(this.id).render('user/administrators/roleform', data).done(function(){
+          view(this.id).render('/system/role/edit/'+data.roleId, data).done(function(){
             form.render(null, 'layuiadmin-form-role');
             
             //监听提交

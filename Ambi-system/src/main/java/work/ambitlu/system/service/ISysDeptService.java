@@ -1,6 +1,8 @@
 package work.ambitlu.system.service;
 
 import java.util.List;
+
+import work.ambitlu.common.core.domain.Jstree;
 import work.ambitlu.common.core.domain.Ztree;
 import work.ambitlu.system.domain.SysDept;
 import work.ambitlu.system.domain.SysRole;
@@ -26,7 +28,7 @@ public interface ISysDeptService
      * @param dept 部门信息
      * @return 所有部门信息
      */
-    public List<Ztree> selectDeptTree(SysDept dept);
+    public List<Jstree> selectDeptTree(SysDept dept);
 
     /**
      * 根据角色ID查询菜单
@@ -34,7 +36,7 @@ public interface ISysDeptService
      * @param role 角色对象
      * @return 菜单列表
      */
-    public List<Ztree> roleDeptTreeData(SysRole role);
+    public List<Jstree> roleDeptTreeData(SysRole role);
 
     /**
      * 查询部门人数

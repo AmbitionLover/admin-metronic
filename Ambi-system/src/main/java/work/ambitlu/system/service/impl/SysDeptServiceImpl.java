@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import work.ambitlu.common.annotation.DataScope;
 import work.ambitlu.common.constant.UserConstants;
+import work.ambitlu.common.core.domain.Jstree;
 import work.ambitlu.common.core.domain.Ztree;
 import work.ambitlu.common.exception.BusinessException;
 import work.ambitlu.common.utils.StringUtils;
@@ -47,11 +48,11 @@ public class SysDeptServiceImpl implements ISysDeptService
      */
     @Override
     @DataScope(deptAlias = "d")
-    public List<Ztree> selectDeptTree(SysDept dept)
+    public List<Jstree> selectDeptTree(SysDept dept)
     {
         List<SysDept> deptList = deptMapper.selectDeptList(dept);
-        List<Ztree> ztrees = initZtree(deptList);
-        return ztrees;
+        List<Jstree> jstrees = initZtree(deptList);
+        return jstrees;
     }
 
     /**
@@ -61,21 +62,21 @@ public class SysDeptServiceImpl implements ISysDeptService
      * @return 部门列表（数据权限）
      */
     @Override
-    public List<Ztree> roleDeptTreeData(SysRole role)
+    public List<Jstree> roleDeptTreeData(SysRole role)
     {
         Long roleId = role.getRoleId();
-        List<Ztree> ztrees = new ArrayList<Ztree>();
+        List<Jstree> jstrees = new ArrayList<Jstree>();
         List<SysDept> deptList = selectDeptList(new SysDept());
         if (StringUtils.isNotNull(roleId))
         {
             List<String> roleDeptList = deptMapper.selectRoleDeptTree(roleId);
-            ztrees = initZtree(deptList, roleDeptList);
+            jstrees = initZtree(deptList, roleDeptList);
         }
         else
         {
-            ztrees = initZtree(deptList);
+            jstrees = initZtree(deptList);
         }
-        return ztrees;
+        return jstrees;
     }
 
     /**
@@ -84,7 +85,7 @@ public class SysDeptServiceImpl implements ISysDeptService
      * @param deptList 部门列表
      * @return 树结构列表
      */
-    public List<Ztree> initZtree(List<SysDept> deptList)
+    public List<Jstree> initZtree(List<SysDept> deptList)
     {
         return initZtree(deptList, null);
     }
@@ -96,28 +97,27 @@ public class SysDeptServiceImpl implements ISysDeptService
      * @param roleDeptList 角色已存在菜单列表
      * @return 树结构列表
      */
-    public List<Ztree> initZtree(List<SysDept> deptList, List<String> roleDeptList)
+    public List<Jstree> initZtree(List<SysDept> deptList, List<String> roleDeptList)
     {
 
-        List<Ztree> ztrees = new ArrayList<Ztree>();
+        List<Jstree> jstrees = new ArrayList<Jstree>();
         boolean isCheck = StringUtils.isNotNull(roleDeptList);
         for (SysDept dept : deptList)
         {
             if (UserConstants.DEPT_NORMAL.equals(dept.getStatus()))
             {
-                Ztree ztree = new Ztree();
-                ztree.setId(dept.getDeptId());
-                ztree.setPId(dept.getParentId());
-                ztree.setName(dept.getDeptName());
-                ztree.setTitle(dept.getDeptName());
+                Jstree jstree = new Jstree();
+                jstree.setId(dept.getDeptId()+"");
+                jstree.setParent(dept.getParentId()==0?"#":dept.getParentId().toString());
+                jstree.setText(dept.getDeptName());
                 if (isCheck)
                 {
-                    ztree.setChecked(roleDeptList.contains(dept.getDeptId() + dept.getDeptName()));
+                    jstree.getState().put("selected",roleDeptList.contains(dept.getDeptId() + dept.getDeptName()));
                 }
-                ztrees.add(ztree);
+                jstrees.add(jstree);
             }
         }
-        return ztrees;
+        return jstrees;
     }
 
     /**

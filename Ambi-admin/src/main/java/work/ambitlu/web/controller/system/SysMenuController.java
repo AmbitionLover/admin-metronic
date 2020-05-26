@@ -121,7 +121,7 @@ public class SysMenuController extends BaseController
     public String edit(@PathVariable("menuId") Long menuId, ModelMap mmap)
     {
         mmap.put("menu", menuService.selectMenuById(menuId));
-        return prefix + "/edit";
+        return prefix + "/menuform";
     }
 
     /**

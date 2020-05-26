@@ -110,7 +110,7 @@ public class SysRoleController extends BaseController
     public String edit(@PathVariable("roleId") Long roleId, ModelMap mmap)
     {
         mmap.put("role", roleService.selectRoleById(roleId));
-        return prefix + "/edit";
+        return prefix + "/roleform";
     }
 
     /**

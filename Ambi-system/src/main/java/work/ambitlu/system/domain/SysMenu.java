@@ -7,9 +7,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import work.ambitlu.common.core.domain.BaseEntity;
 
+
 /**
  * 菜单权限表 sys_menu
- * 
+ *
  * @author ruoyi
  */
 public class SysMenu extends BaseEntity
@@ -181,21 +182,21 @@ public class SysMenu extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("menuId", getMenuId())
-            .append("menuName", getMenuName())
-            .append("parentId", getParentId())
-            .append("orderNum", getOrderNum())
-            .append("url", getUrl())
-            .append("target", getTarget())
-            .append("menuType", getMenuType())
-            .append("visible", getVisible())
-            .append("perms", getPerms())
-            .append("icon", getIcon())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("remark", getRemark())
-            .toString();
+                .append("menuId", getMenuId())
+                .append("menuName", getMenuName())
+                .append("parentId", getParentId())
+                .append("orderNum", getOrderNum())
+                .append("url", getUrl())
+                .append("target", getTarget())
+                .append("menuType", getMenuType())
+                .append("visible", getVisible())
+                .append("perms", getPerms())
+                .append("icon", getIcon())
+                .append("createBy", getCreateBy())
+                .append("createTime", getCreateTime())
+                .append("updateBy", getUpdateBy())
+                .append("updateTime", getUpdateTime())
+                .append("remark", getRemark())
+                .toString();
     }
 }
